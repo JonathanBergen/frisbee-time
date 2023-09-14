@@ -12,13 +12,13 @@
 2. The app facilitates the rapid assembly of spontaneous recreational activities, including, but not limited to, the playing of ultimate frisbee.
 3. (Possible) Uses weather and location data to notify those interested.
 ### Questions for Customers
-1. What would be the most fun part of using an app like this?
-2. How would you inject extra joy into this project?
-3. What would you expect to see when you get a notification that says: "The weather is nice, I think it's FrisbeeTime!"
-4. How do want to set your preferences, what type?
+1. What would be the most liberating part of using an app like this?
+2. What's the minimum number of people required for frisbee?
+3. How much detail would you like to see when you get a notification that says: "The weather is nice, I think it's FrisbeeTime!"
+4. What settings would you like to be able to control?
 5. Would you sync your calendar with this app?
 6. How much would you pay for this app?
-7. What features do you see as essential for a scheduling app?
+7. What features are essential for this app?
 ****
 ## System Architecture
 1. App allows for simple login via existing methods
@@ -29,3 +29,6 @@
 2. Jonathan Mast
 3. Clayton Wagler
 4. Conrad Stoltzfus
+****
+## Possible Expansions
+1. Iphone widget
