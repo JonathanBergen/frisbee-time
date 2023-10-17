@@ -33,3 +33,10 @@
 ****
 ## Possible Expansions
 1. Iphone widget
+****
+## System Practices
+### Code Naming Style
+- Constants: CONSTANT_NAME
+- Variables: variable_name
+- Functions: functionName
+- Classes: ClassName
