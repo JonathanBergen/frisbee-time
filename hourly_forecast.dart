@@ -4,17 +4,19 @@ class HourlyForecast {
   var wind_speed;
   var inches_precipitation;
 
-  HourlyForecast(this.time_UNIX, this.temperature, this.wind_speed, this.inches_precipitation);
+  HourlyForecast(this.time_UNIX, this.temperature, this.wind_speed,
+      this.inches_precipitation);
 
   double get frisbee_score {
     return calculateFrisbeeScore();
   }
 
   double calculateFrisbeeScore() {
-    var aggregate_score = 0;
+    var aggregate_score = 0.0;
     aggregate_score += partialFrisbeeScoreFromTemperature(this.temperature);
     aggregate_score += partialFrisbeeScoreFromWindSpeed(this.wind_speed);
-    aggregate_score += partialFrisbeeScoreFromPrecipitation(this.inches_precipitation);
+    aggregate_score +=
+        partialFrisbeeScoreFromPrecipitation(this.inches_precipitation);
     return aggregate_score;
   }
 }
