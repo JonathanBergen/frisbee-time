@@ -18,4 +18,6 @@ void main() {
       expect(nextSundayNight, expectedDateTime);
     });
   });
+
+  // Given a week of weather data, the frisbee score algorithm correctly identifies every day that is unanimously identified as the best day by 3 frisbee players.
 }
