@@ -35,6 +35,7 @@
 1. Iphone widget
 ****
 ## System Practices
+The code formatting follows the practices outlined at: https://dart.dev/tools/dart-format
 ### Code Naming Style
 - Constants: CONSTANT_NAME
 - Variables: variable_name
