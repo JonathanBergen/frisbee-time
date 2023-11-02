@@ -20,7 +20,6 @@ Look for malfunction of menus and UIs on various screensizes using FlutterFlow.
 ### Settings Page:
 - [ ] Attempt a valid change to a field. Exit the settings page and re-enter to verify that the change has been saved. Repeat this for all fields.
 - [ ] Attempt invalid form data and confirm that errors are thrown where appropriate.
-  - [ ] Attempt invalid location (ex: Ocean) and ensure errors are thrown.
 ### Other tests:
 - [ ] Log in (as an admin account)? and test the notification system with the widget in the settings page.
   - [ ] Set up test game, ensure all notifications go out correctly
