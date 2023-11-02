@@ -3,12 +3,11 @@ class HourlyForecast {
   var temperature;
   var wind_speed;
   var inches_precipitation;
+  var frisbee_score;
 
   HourlyForecast(this.time_UNIX, this.temperature, this.wind_speed,
-      this.inches_precipitation);
-
-  double get frisbee_score {
-    return calculateFrisbeeScore();
+      this.inches_precipitation) {
+    this.frisbee_score = calculateFrisbeeScore;
   }
 
   double calculateFrisbeeScore() {
