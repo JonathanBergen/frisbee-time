@@ -6,7 +6,6 @@
 3. Accessibility - Operates on mobile devices of different OSes
 4. Meets the requirements for the App Store and the Google Play store
 5. (Possible) Boston Common legality
-6. (Possible) Exclude California and UK Residents
 ****
 ## Functional Requirements
 1. Users define constraints for notifications. (Time, Amount of people, Temp)
@@ -45,6 +44,8 @@ The code formatting follows the practices outlined at: https://dart.dev/tools/da
 ### Schema
 ![image](https://github.com/JonathanBergen/frisbee-time/assets/72107680/861ad4c7-26b1-447b-b2ed-09f7806a8182)
 ![image](https://github.com/JonathanBergen/frisbee-time/assets/72107680/931accd8-25a7-4806-bd72-41217fab50cf)
+![image](https://github.com/JonathanBergen/frisbee-time/assets/91574942/c3f7c17c-61fa-4df3-9a76-eddcb8cd1b04)
+
 
 ### Risk Assessment
 
