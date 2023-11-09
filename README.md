@@ -6,7 +6,6 @@
 3. Accessibility - Operates on mobile devices of different OSes
 4. Meets the requirements for the App Store and the Google Play store
 5. (Possible) Boston Common legality
-6. (Possible) Exclude California and UK Residents
 ****
 ## Functional Requirements
 1. Users define constraints for notifications. (Time, Amount of people, Temp)
