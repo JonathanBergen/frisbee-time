@@ -7,7 +7,7 @@ class HourlyForecast {
 
   HourlyForecast(this.time_UNIX, this.temperature, this.wind_speed,
       this.inches_precipitation) {
-    this.frisbee_score = calculateFrisbeeScore;
+    this.frisbee_score = calculateFrisbeeScore();
   }
 
   double calculateFrisbeeScore() {
@@ -18,22 +18,27 @@ class HourlyForecast {
         partialFrisbeeScoreFromPrecipitation(this.inches_precipitation);
     return aggregate_score;
   }
-}
 
-double partialFrisbeeScoreFromTemperature(double temperature) {
-  var score = 100;
-  var bad_temperature = 60 - temperature;
-  return score - bad_temperature;
-}
+  @override
+  String toString() {
+    return 'HourlyForecast(time: $time_UNIX, temperature: $temperature, wind_speed: $wind_speed, inches_precipitation: $inches_precipitation, frisbee_score: $frisbee_score)';
+  }
 
-double partialFrisbeeScoreFromWindSpeed(double wind_speed) {
-  var score = 100;
-  var wind_penalty = 0.75;
-  return score - (wind_penalty * wind_speed) * (wind_penalty * wind_speed);
-}
+  double partialFrisbeeScoreFromTemperature(double temperature) {
+    var score = 100;
+    var bad_temperature = 60 - temperature;
+    return score - bad_temperature;
+  }
 
-double partialFrisbeeScoreFromPrecipitation(double inches_precipitation) {
-  var score = 100;
-  var precipitation_penalty = 10;
-  return score - inches_precipitation * precipitation_penalty;
+  double partialFrisbeeScoreFromWindSpeed(double wind_speed) {
+    var score = 100;
+    var wind_penalty = 0.75;
+    return score - (wind_penalty * wind_speed) * (wind_penalty * wind_speed);
+  }
+
+  double partialFrisbeeScoreFromPrecipitation(double inches_precipitation) {
+    var score = 100;
+    var precipitation_penalty = 10;
+    return score - inches_precipitation * precipitation_penalty;
+  }
 }

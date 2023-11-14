@@ -1,0 +1,9 @@
+name: frisbee_time
+description: Is it frisbee time yet?
+version: 1.0.0
+
+dependencies:
+  http: ^0.13.3
+
+environment:
+  sdk: '^3.1.0'

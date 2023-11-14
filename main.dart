@@ -1,20 +1,6 @@
-// import 'weather_data.dart';
+import 'weekly_forecast.dart';
 
-// var frisbee_time_scores = WeatherData.calculateFrisbeeTimeScores();
-
-var player_availability_times = "";
-
-void main() {}
-
-void sendNotificationsForTimeSlot() {}
-
-bool frisbeeHasBeenPlayedThisWeek() {
-  return false;
+void main() async {
+  var thisWeek = await GetWeather(42.3551, 71.0657);
+  print(thisWeek.hourly_forecasts);
 }
-
-DateTime nextSundayMidnight() {
-  final date = DateTime.now();
-  return DateTime.utc(date.year, date.month, date.day + date.weekday % 7);
-}
-
-https://open-meteo.com/en/docs#hourly=temperature_2m,precipitation_probability,windspeed_10m&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York
