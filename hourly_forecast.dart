@@ -10,6 +10,16 @@ class HourlyForecast {
     this.frisbee_score = calculateFrisbeeScore();
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'time_UNIX': time_UNIX,
+      'temperature': temperature,
+      'wind_speed': wind_speed,
+      'inches_precipitation': inches_precipitation,
+      'frisbee_score': frisbee_score,
+    };
+  }
+
   double calculateFrisbeeScore() {
     var aggregate_score = 0.0;
     aggregate_score += partialFrisbeeScoreFromTemperature(this.temperature);

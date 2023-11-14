@@ -14,6 +14,13 @@ class WeeklyForecast {
     }
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'hourly_forecasts':
+          hourly_forecasts.map((forecast) => forecast.toJson()).toList(),
+    };
+  }
+
   factory WeeklyForecast.fromJson(Map<String, dynamic> json) {
     return WeeklyForecast(
       (json['hourly']['time'] as List<dynamic>).cast<int>(),
