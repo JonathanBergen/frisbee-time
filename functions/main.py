@@ -28,8 +28,7 @@ class HourlyForecast:
         self.temperature = temperature
         self.wind_speed = wind_speed
         self.inches_precipitation = inches_precipitation
-        self.num_available_users = user_availability[
-            self.time_UNIX.weekday() * 2 + 1 if self.time_UNIX.hour >= 13 else 0]
+        self.users_available = user_availability[self.time_UNIX.weekday() * 2 + 1 if self.time_UNIX.hour >= 13 else 0]
         self.frisbee_score = self.calculate_frisbee_score()
 
     def to_json(self):
@@ -38,7 +37,7 @@ class HourlyForecast:
             'temperature': self.temperature,
             'wind_speed': self.wind_speed,
             'inches_precipitation': self.inches_precipitation,
-            'num_available_users': self.num_available_users,
+            'users_available': self.users_available,
             'frisbee_score': self.frisbee_score,
         }
 
@@ -49,8 +48,8 @@ class HourlyForecast:
         aggregate_score += self.partial_frisbee_score_from_precipitation(self.inches_precipitation)
 
         # Modify frisbee score based on user availability
-        if self.num_available_users >= 6:
-            aggregate_score *= 1.05 ** (self.num_available_users - 6)
+        if len(self.users_available) >= 6:
+            aggregate_score *= 1.05 ** (len(self.users_available) - 6)
         else:
             aggregate_score = 0.0
 
@@ -81,16 +80,26 @@ class HourlyForecast:
 class WeeklyForecast:
     def __init__(self, times, temperatures, precipitation, windspeeds):
         self.hourly_forecasts = []
-        self.user_availabilities = self.calculate_num_available_users(self)
+        self.users_available = self.calculate_num_available_users(self)
         for i in range(len(times)):
             self.hourly_forecasts.append(
                 HourlyForecast(dt.utcfromtimestamp(times[i]), temperatures[i], windspeeds[i], precipitation[i],
-                               self.user_availabilities))
+                               self.users_available))
 
     def to_json(self):
         return {
             'hourly_forecasts': [forecast.to_json() for forecast in self.hourly_forecasts],
         }
+
+    def get_best_gametime(self):
+        max_score = -1
+        best_gametime = None
+        for hourly_forecast in self.hourly_forecasts:
+            if hourly_forecast.frisbee_score > max_score:
+                max_score = hourly_forecast.frisbee_score
+                best_gametime = hourly_forecast
+
+        return best_gametime
 
     @classmethod
     def from_json(cls, json_data):
@@ -107,10 +116,11 @@ class WeeklyForecast:
         user_collection = db.collection('users')
         user_documents = user_collection.stream()
 
-        user_availabilities = {n: 0 for n in range(14)}
+        user_availabilities = {n: [] for n in range(14)}
         for user_document in user_documents:
+            user_id = user_document.id
             for available_time in user_document.to_dict().get('availableTime', []):
-                user_availabilities[available_time] += 1
+                user_availabilities[available_time].append(user_id)
 
         return user_availabilities
 
@@ -125,8 +135,24 @@ def get_weather(lat, long):
         raise Exception('Failed to fetch weather data')
 
 
-# Example usage:
-latitude = 42.3551
-longitude = -71.0657
-weekly_forecast = get_weather(latitude, longitude)
-print(weekly_forecast.to_json())
+def get_best_gametime():
+    return get_weather(42.3551, -71.0657).get_best_gametime()
+
+
+def create_game_record(game):
+    games_collection_ref = db.collection('games')
+
+    data = {
+        "game_is_played": False,
+        "gametime_utc": game.time_UNIX,
+        "players": [db.collection('users').document(user_doc_id) for user_doc_id in game.users_available],
+        "precipitation": game.inches_precipitation,
+        "temp": game.temperature,
+        "wind": game.wind_speed,
+        "time_created": dt.utcnow(),
+    }
+
+    new_game_ref = games_collection_ref.add(data)
+
+
+create_game_record(get_best_gametime())
