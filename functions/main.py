@@ -1,25 +1,35 @@
 # Welcome to Cloud Functions for Firebase for Python!
 # To get started, simply uncomment the below code or create your own.
 # Deploy with `firebase deploy`
-#
-# from firebase_functions import https_fn
-# from firebase_admin import initialize_app
-# initialize_app()
-#
-#
-# @https_fn.on_request()
-# def on_request_example(req: https_fn.Request) -> https_fn.Response:
-#     return https_fn.Response("Hello world!")
 
+from firebase_functions import https_fn
+from firebase_functions import scheduler_fn
 import requests
 import firebase_admin
-from firebase_admin import credentials, firestore
+from firebase_admin import credentials, firestore, auth
 from datetime import datetime as dt
 
 # Initialize Firebase Admin SDK
 cred = credentials.Certificate('secret-2.json')
 firebase_admin.initialize_app(cred)
 db = firestore.client()
+
+@scheduler_fn.on_schedule(schedule="0 7,20 * * *")
+
+@https_fn.on_request()
+def writeGame(event: scheduler_fn.ScheduledEvent) -> None:
+    # try:
+    #     # Check the Authorization header for the authentication token
+    #     id_token = req.headers.get('Authorization').split('Bearer ')[1]
+    #     decoded_token = auth.verify_id_token(id_token)
+    # except Exception as e:
+    #     return https_fn.Response(f"Authentication error: {str(e)}", status=401)
+
+    # Your function logic here
+    create_game_record(get_best_gametime())
+
+    # return https_fn.Response("Game record created successfully!")
+
 
 
 class HourlyForecast:
@@ -152,7 +162,4 @@ def create_game_record(game):
         "time_created": dt.utcnow(),
     }
 
-    new_game_ref = games_collection_ref.add(data)
-
-
-create_game_record(get_best_gametime())
+    games_collection_ref.add(data)

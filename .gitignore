@@ -64,3 +64,5 @@ node_modules/
 
 # dotenv environment variables file
 .env
+/.dart_tool/package_config.json
+/functions/secret-2.json
