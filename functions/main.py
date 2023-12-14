@@ -6,7 +6,7 @@ from firebase_functions import https_fn
 from firebase_functions import scheduler_fn
 import requests
 import firebase_admin
-from firebase_admin import credentials, firestore, auth
+from firebase_admin import credentials, firestore
 from datetime import datetime as dt
 
 # Initialize Firebase Admin SDK
@@ -14,22 +14,11 @@ cred = credentials.Certificate('secret-2.json')
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
-@scheduler_fn.on_schedule(schedule="0 7,20 * * *")
 
+@scheduler_fn.on_schedule(schedule="0 7,20 * * *")
 @https_fn.on_request()
 def writeGame(event: scheduler_fn.ScheduledEvent) -> None:
-    # try:
-    #     # Check the Authorization header for the authentication token
-    #     id_token = req.headers.get('Authorization').split('Bearer ')[1]
-    #     decoded_token = auth.verify_id_token(id_token)
-    # except Exception as e:
-    #     return https_fn.Response(f"Authentication error: {str(e)}", status=401)
-
-    # Your function logic here
     create_game_record(get_best_gametime())
-
-    # return https_fn.Response("Game record created successfully!")
-
 
 
 class HourlyForecast:
