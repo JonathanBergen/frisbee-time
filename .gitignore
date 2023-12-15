@@ -68,3 +68,4 @@ node_modules/
 /functions/secret-2.json
 /functions/venv/
 /functions/__pycache__/
+/frisbee_time/
