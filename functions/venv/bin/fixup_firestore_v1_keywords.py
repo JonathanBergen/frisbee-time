@@ -1,4 +1,4 @@
-#!/Users/jbergen/frisbee-time/functions/venv/bin/python3.11
+#!/Users/jvcte/Documents/School/Year 2, Sem 1/Software Engineering/Project/frisbee-time/functions/venv/bin/python3.11
 # -*- coding: utf-8 -*-
 # Copyright 2023 Google LLC
 #

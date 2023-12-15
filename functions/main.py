@@ -6,7 +6,7 @@ from firebase_functions import https_fn
 from firebase_functions import scheduler_fn
 import requests
 import firebase_admin
-from firebase_admin import credentials, firestore
+from firebase_admin import credentials, firestore, messaging
 from datetime import datetime as dt
 
 # Initialize Firebase Admin SDK
@@ -152,3 +152,37 @@ def create_game_record(game):
     }
 
     games_collection_ref.add(data)
+
+# TM: Add this line to send notifications after creating the game record 
+    send_initial_notifications(game)
+
+# TM: Send notif 1
+def send_initial_notifications(game):
+    # Retrieve user tokens for sending notifications
+    user_tokens = get_user_tokens(game.users_available)
+
+    # Create the notification message
+    message = messaging.MulticastMessage(
+        notification=messaging.Notification(
+            title="New Game Available!",
+            body="Are you interested in joining the game on {}?".format(game.time_UNIX.strftime("%m/%d at %H:%M")),
+        ),
+        tokens=user_tokens,
+        # Optionally, you can add a data payload to handle deep linking
+        data={"game_id": str(game.id)}, # Assuming each game has a unique ID
+    )
+
+    # Send the message
+    response = messaging.send_multicast(message)
+    print('Successfully sent messages:', response.success_count)
+
+# Find the tokens!
+def get_user_tokens(users_available):
+    tokens = []
+    for user_id in users_available:
+        user_doc = db.collection('users').document(user_id).get()
+        if user_doc.exists:
+            token = user_doc.to_dict().get('fcm_token') # Assuming each user has an FCM token stored
+            if token:
+                tokens.append(token)
+    return tokens
