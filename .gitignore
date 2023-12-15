@@ -69,3 +69,4 @@ node_modules/
 /functions/venv/
 /functions/__pycache__/
 /frisbee_time/
+/frisbee_time/android/app/google-services.json
