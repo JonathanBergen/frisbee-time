@@ -10,7 +10,7 @@ from firebase_admin import credentials, firestore, messaging
 from datetime import datetime as dt
 
 # Initialize Firebase Admin SDK
-cred = credentials.Certificate('secret-2.json')
+cred = credentials.Certificate('/Users/jvcte/Documents/School/Year 2, Sem 1/Software Engineering/Project/frisbee-time/functions/secret-2.json')
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
