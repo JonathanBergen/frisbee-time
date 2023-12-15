@@ -1,4 +1,6 @@
-#!/Users/jbergen/frisbee-time/functions/venv/bin/python3.11
+#!/bin/sh
+'''exec' "/Users/jvcte/Documents/School/Year 2, Sem 1/Software Engineering/Project/frisbee-time/functions/venv/bin/python3.11" "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys

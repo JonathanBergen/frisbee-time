@@ -66,3 +66,7 @@ node_modules/
 .env
 /.dart_tool/package_config.json
 /functions/secret-2.json
+/functions/venv/
+/functions/__pycache__/
+/frisbee_time/
+/frisbee_time/android/app/google-services.json
