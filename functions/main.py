@@ -141,10 +141,13 @@ def get_best_gametime():
 def create_game_record(game):
     games_collection_ref = db.collection('games')
 
+    # Change the players list to a map with user IDs as keys and False as values
+    players_map = {user_doc_id: False for user_doc_id in game.users_available}
+
     data = {
         "game_is_played": False,
         "gametime_utc": game.time_UNIX,
-        "players": [db.collection('users').document(user_doc_id) for user_doc_id in game.users_available],
+        "players": players_map,  # Updated to use the new players map
         "precipitation": game.inches_precipitation,
         "temp": game.temperature,
         "wind": game.wind_speed,
